@@ -28,6 +28,11 @@ export default function CinematicIntro({ onComplete }: { onComplete: () => void 
     return () => [t1,t2,t3,t4,t5,t6].forEach(clearTimeout)
   }, [onComplete])
 
+  const handleSkip = () => {
+    setVisible(false)
+    onComplete()
+  }
+
   const easing = [0.16, 1, 0.3, 1] as const
 
   return (
@@ -36,7 +41,7 @@ export default function CinematicIntro({ onComplete }: { onComplete: () => void 
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.9, ease: easing }}
+          transition={{ duration: 0.7, ease: easing }}
           style={{
             position: 'fixed', inset: 0, zIndex: 9900,
             background: 'radial-gradient(ellipse 60% 70% at 50% 50%, var(--bg-wine) 0%, var(--bg-base) 100%)',
@@ -45,6 +50,29 @@ export default function CinematicIntro({ onComplete }: { onComplete: () => void 
             overflow: 'hidden',
           }}
         >
+          {/* Skip button */}
+          <button
+            onClick={handleSkip}
+            className="interactive"
+            style={{
+              position: 'absolute',
+              top: '1.5rem',
+              right: '1.5rem',
+              background: 'var(--glass-bg)',
+              border: '1px solid var(--glass-border)',
+              borderRadius: '9999px',
+              padding: '0.4rem 0.9rem',
+              color: 'var(--accent-rose)',
+              fontSize: '0.7rem',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              zIndex: 10,
+              backdropFilter: 'blur(10px)',
+            }}
+          >
+            Skip ↗
+          </button>
           {/* Particle dots */}
           <ParticleField />
 

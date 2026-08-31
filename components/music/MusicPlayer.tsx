@@ -61,8 +61,13 @@ export default function MusicPlayer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9990,
-              display: 'flex', alignItems: 'center', gap: '0.75rem',
+              position: 'fixed',
+              bottom: 'clamp(1rem, 3vh, 2rem)',
+              right: 'clamp(1rem, 3vw, 2rem)',
+              zIndex: 9990,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
             }}
           >
             <motion.button
@@ -73,28 +78,34 @@ export default function MusicPlayer() {
               title={playing ? 'Pause music' : 'Play music'}
               aria-label={playing ? 'Pause music' : 'Play music'}
               style={{
-                display: 'flex', alignItems: 'center', gap: '0.625rem',
-                padding: '0.625rem 1.125rem',
-                background: 'rgba(10, 5, 9, 0.8)',
-                border: `1px solid rgba(255,111,159,${playing ? 0.5 : 0.2})`,
-                backdropFilter: 'blur(20px)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.625rem',
+                padding: '0.55rem 1rem',
+                background: 'var(--glass-bg)',
+                border: `1px solid ${playing ? 'var(--accent-rose)' : 'var(--glass-border)'}`,
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                borderRadius: '9999px',
                 cursor: 'pointer',
-                transition: 'border-color 0.3s ease',
+                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.2)',
+                transition: 'border-color 0.3s ease, background 0.3s ease',
               }}
             >
               <motion.div
                 animate={playing ? { rotate: [0, 360] } : { rotate: 0 }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
               >
-                <Music size={12} color={playing ? 'var(--accent-rose)' : 'var(--text-muted)'} />
+                <Music size={12} color="var(--accent-rose)" />
               </motion.div>
-              <span className="text-label" style={{ color: playing ? 'var(--accent-blush)' : 'var(--text-muted)', fontSize: '0.6rem' }}>
+              <span className="text-label" style={{ color: 'var(--text-primary)', fontSize: '0.6rem', letterSpacing: '0.12em' }}>
                 {playing ? 'Now Playing' : 'Our Song'}
               </span>
-              {playing
-                ? <Pause size={10} color="var(--accent-rose)" />
-                : <Play size={10} color="var(--text-muted)" />
-              }
+              {playing ? (
+                <Pause size={10} color="var(--accent-rose)" />
+              ) : (
+                <Play size={10} color="var(--accent-rose)" />
+              )}
             </motion.button>
           </motion.div>
         )}

@@ -54,6 +54,7 @@ export default function HeroSection() {
         minHeight: '100vh', position: 'relative', overflow: 'hidden',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         background: 'var(--hero-gradient)',
+        padding: 'clamp(5.5rem, 12vh, 7.5rem) clamp(1rem, 4vw, 4rem) clamp(3rem, 8vh, 5rem)',
       }}
     >
       {/* Floating particles */}
@@ -77,22 +78,22 @@ export default function HeroSection() {
         animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         style={{
-          position: 'absolute', width: '700px', height: '700px', borderRadius: '50%',
+          position: 'absolute', width: 'clamp(300px, 70vw, 700px)', height: 'clamp(300px, 70vw, 700px)', borderRadius: '50%',
           background: 'radial-gradient(circle, var(--spotlight-glow) 0%, transparent 65%)',
           pointerEvents: 'none', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
         }}
       />
 
-      <div style={{ position: 'relative', zIndex: 1, width: '100%', padding: '0 clamp(1.5rem, 6vw, 6rem)', textAlign: 'center' }}>
+      <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
 
         {/* 3D Heart */}
         <motion.div
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 1.4, ease: [0.34, 1.56, 0.64, 1] }}
-          style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'center' }}
+          style={{ marginBottom: 'clamp(1rem, 3vh, 2rem)', display: 'flex', justifyContent: 'center' }}
         >
-          <div style={{ width: '200px', height: '200px' }}>
+          <div style={{ width: 'clamp(150px, 34vw, 210px)', height: 'clamp(150px, 34vw, 210px)' }}>
             <Suspense fallback={<HeartFallback />}>
               <FloatingHeart3D />
             </Suspense>
@@ -105,7 +106,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 1, ease: easing }}
           className="text-label"
-          style={{ marginBottom: '0.5rem', color: 'var(--accent-rose)', opacity: 0.7 }}
+          style={{ marginBottom: '0.4rem', color: 'var(--accent-rose)', opacity: 0.8 }}
         >
           01 September
         </motion.p>
@@ -116,9 +117,9 @@ export default function HeroSection() {
           transition={{ delay: 0.8, duration: 1.2, ease: easing }}
           className="font-display"
           style={{
-            fontSize: 'clamp(3rem, 10vw, 9rem)', fontWeight: 300,
-            letterSpacing: '-0.02em', lineHeight: 0.9,
-            color: 'var(--text-primary)', marginBottom: '0.25rem',
+            fontSize: 'clamp(2.25rem, 8vw, 8rem)', fontWeight: 300,
+            letterSpacing: '-0.02em', lineHeight: 0.95,
+            color: 'var(--text-primary)', marginBottom: '0.2rem',
           }}
         >
           Happy Birthday
@@ -130,9 +131,9 @@ export default function HeroSection() {
           transition={{ delay: 1.1, duration: 1.4, ease: easing }}
           className="font-display gradient-text"
           style={{
-            fontSize: 'clamp(4rem, 18vw, 18rem)', fontWeight: 300,
-            letterSpacing: '-0.03em', lineHeight: 0.85,
-            marginBottom: '2.5rem',
+            fontSize: 'clamp(3.5rem, 16vw, 16rem)', fontWeight: 300,
+            letterSpacing: '-0.03em', lineHeight: 0.88,
+            marginBottom: 'clamp(1.5rem, 4vh, 2.5rem)',
           }}
         >
           {PERSON.name}
@@ -144,9 +145,9 @@ export default function HeroSection() {
           transition={{ delay: 1.5, duration: 1, ease: easing }}
           className="font-display"
           style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', fontWeight: 300,
+            fontSize: 'clamp(1rem, 2.5vw, 1.4rem)', fontWeight: 300,
             fontStyle: 'italic', color: 'var(--text-secondary)',
-            maxWidth: '560px', margin: '0 auto 3.5rem', lineHeight: 1.6,
+            maxWidth: '560px', margin: '0 auto clamp(2rem, 5vh, 3.5rem)', lineHeight: 1.6,
           }}
         >
           Today is not just another day.
