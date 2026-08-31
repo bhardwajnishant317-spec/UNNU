@@ -3,55 +3,59 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Music, Pause, Play } from 'lucide-react'
 
-const START_TIME_SEC = 0
-
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
   const [userPaused, setUserPaused] = useState(false)
   const [visible, setVisible] = useState(false)
 
-  // Start playback function
-  const startPlayback = async () => {
+  // Direct play attempt
+  const playAudio = () => {
     if (!audioRef.current || userPaused) return
-    try {
-      if (START_TIME_SEC > 0 && audioRef.current.currentTime < START_TIME_SEC) {
-        audioRef.current.currentTime = START_TIME_SEC
-      }
-      audioRef.current.volume = 0.75
-      await audioRef.current.play()
-      setPlaying(true)
-    } catch {
-      // Autoplay blocked by browser policy until user gesture
+    audioRef.current.volume = 0.85
+    const playPromise = audioRef.current.play()
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setPlaying(true)
+        })
+        .catch(() => {
+          // If browser policy delays unmuted autoplay, retry on any first page event
+        })
     }
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 1500)
+    // Show player pill quickly
+    const timer = setTimeout(() => setVisible(true), 800)
 
-    // Attempt direct autoplay on load
-    startPlayback()
+    // Immediate autoplay execution as soon as component mounts
+    playAudio()
 
-    // Global first-gesture listener to bypass browser autoplay restrictions seamlessly
-    const handleFirstInteraction = () => {
+    // Additional listeners to catch the earliest possible event (scroll, touch, click, mousemove, keydown)
+    const triggerEvents = ['click', 'touchstart', 'touchend', 'scroll', 'keydown', 'mousemove']
+    const handleImmediateGesture = () => {
       if (!userPaused) {
-        startPlayback()
+        playAudio()
       }
     }
 
-    window.addEventListener('click', handleFirstInteraction, { once: true })
-    window.addEventListener('touchstart', handleFirstInteraction, { once: true })
-    window.addEventListener('unnati-play-music', startPlayback)
+    triggerEvents.forEach((evt) => {
+      window.addEventListener(evt, handleImmediateGesture, { once: true, passive: true })
+    })
+
+    window.addEventListener('unnati-play-music', playAudio)
 
     return () => {
       clearTimeout(timer)
-      window.removeEventListener('click', handleFirstInteraction)
-      window.removeEventListener('touchstart', handleFirstInteraction)
-      window.removeEventListener('unnati-play-music', startPlayback)
+      triggerEvents.forEach((evt) => {
+        window.removeEventListener(evt, handleImmediateGesture)
+      })
+      window.removeEventListener('unnati-play-music', playAudio)
     }
   }, [userPaused])
 
-  const toggle = async () => {
+  const toggle = () => {
     if (!audioRef.current) return
     if (playing) {
       audioRef.current.pause()
@@ -59,38 +63,35 @@ export default function MusicPlayer() {
       setUserPaused(true)
     } else {
       setUserPaused(false)
-      try {
-        audioRef.current.volume = 0.75
-        await audioRef.current.play()
-        setPlaying(true)
-      } catch {}
+      audioRef.current.volume = 0.85
+      audioRef.current.play().then(() => setPlaying(true)).catch(() => {})
     }
-  }
-
-  const handleEnded = () => {
-    if (!audioRef.current) return
-    audioRef.current.currentTime = START_TIME_SEC
-    audioRef.current.play().catch(() => {})
   }
 
   return (
     <>
       <audio
         ref={audioRef}
+        autoPlay
+        playsInline
         loop
         preload="auto"
-        onEnded={handleEnded}
-      >
-        <source src="/music/song.webm" type="audio/webm" />
-        <source src="/music/song.mp3" type="audio/mpeg" />
-      </audio>
+        src="/music/song.webm"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onCanPlay={() => {
+          if (!userPaused) {
+            playAudio()
+          }
+        }}
+      />
 
       <AnimatePresence>
         {visible && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'fixed',
               bottom: 'clamp(1rem, 3vh, 2rem)',
@@ -106,8 +107,8 @@ export default function MusicPlayer() {
               className="interactive magnetic"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              title={playing ? 'Pause music' : 'Play song'}
-              aria-label={playing ? 'Pause music' : 'Play song'}
+              title={playing ? 'Pause music' : 'Play music'}
+              aria-label={playing ? 'Pause music' : 'Play music'}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -140,7 +141,7 @@ export default function MusicPlayer() {
                   fontWeight: 600,
                 }}
               >
-                {playing ? 'Playing' : 'Paused (Tap to Play)'}
+                {playing ? 'Playing' : 'Paused'}
               </span>
               {playing ? (
                 <Pause size={12} color="var(--accent-rose)" />
