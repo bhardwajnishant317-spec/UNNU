@@ -79,9 +79,10 @@ function BlessingLine({ text, index }: { text: string, index: number }) {
       transition={{ delay: index * 0.08, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       className="font-display"
       style={{
-        fontSize: 'clamp(1rem, 2vw, 1.375rem)',
-        fontWeight: 300, color: 'var(--text-secondary)',
-        lineHeight: 1.7,
+        fontSize: 'clamp(1.15rem, 2.2vw, 1.5rem)',
+        fontWeight: 500,
+        color: 'var(--text-primary)',
+        lineHeight: 1.8,
       }}
     >
       {text}

@@ -38,10 +38,10 @@ export default function HiddenMessage() {
               transition={{ delay: i * 0.18, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="font-display"
               style={{
-                fontSize: 'clamp(1.0625rem, 2.5vw, 1.5rem)',
-                fontWeight: 300, fontStyle: 'italic',
-                color: i === hiddenMessageParagraphs.length - 1 ? 'var(--text-primary)' : 'var(--text-secondary)',
-                lineHeight: 1.65,
+                fontSize: 'clamp(1.15rem, 2.6vw, 1.6rem)',
+                fontWeight: 500, fontStyle: 'italic',
+                color: 'var(--text-primary)',
+                lineHeight: 1.75,
               }}
             >
               {line}
@@ -55,7 +55,7 @@ export default function HiddenMessage() {
           transition={{ delay: hiddenMessageParagraphs.length * 0.18 + 0.2, duration: 0.9, ease: [0.34, 1.56, 0.64, 1] }}
         >
           <p className="font-display gradient-text" style={{
-            fontSize: 'clamp(1.5rem, 4vw, 3rem)', fontWeight: 400,
+            fontSize: 'clamp(1.75rem, 4.5vw, 3.25rem)', fontWeight: 600,
           }}>
             Happy Birthday, {PERSON.name}. — Nishu ❤️
           </p>

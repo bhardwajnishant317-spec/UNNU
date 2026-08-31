@@ -103,9 +103,9 @@ export default function GrandFinale() {
           transition={{ delay: 1.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="font-display"
           style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.625rem)', fontWeight: 300,
-            fontStyle: 'italic', color: 'var(--text-secondary)',
-            maxWidth: '620px', margin: '0 auto 4rem', lineHeight: 1.65,
+            fontSize: 'clamp(1.2rem, 3vw, 1.85rem)', fontWeight: 500,
+            fontStyle: 'italic', color: 'var(--text-primary)',
+            maxWidth: '660px', margin: '0 auto 4rem', lineHeight: 1.7,
           }}
         >
           "The world became a little more beautiful the day you were born."
@@ -122,11 +122,11 @@ export default function GrandFinale() {
             animate={{ scale: [1, 1.08, 1] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <svg viewBox="0 0 40 36" width="40" height="36" style={{ margin: '0 auto', display: 'block' }}>
+            <svg viewBox="0 0 40 36" width="44" height="40" style={{ margin: '0 auto', display: 'block' }}>
               <defs>
                 <radialGradient id="hf" cx="50%" cy="30%" r="70%">
-                  <stop offset="0%" stopColor="#FF9FC0" />
-                  <stop offset="100%" stopColor="#C4425A" />
+                  <stop offset="0%" stopColor="#FF85A2" />
+                  <stop offset="100%" stopColor="#E6004C" />
                 </radialGradient>
                 <filter id="hglow">
                   <feGaussianBlur stdDeviation="2" result="blur" />
@@ -147,7 +147,7 @@ export default function GrandFinale() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 1.7, duration: 0.8 }}
           className="text-label"
-          style={{ opacity: 0.3, fontSize: '0.6rem' }}
+          style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.2em' }}
         >
           Made with love by Nishu, just for you.
         </motion.p>

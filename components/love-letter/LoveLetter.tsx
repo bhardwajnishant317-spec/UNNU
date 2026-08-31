@@ -46,10 +46,10 @@ export default function LoveLetter() {
         <motion.h2
           initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
           animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-          transition={{ delay: 0.15, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.15, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="font-display gradient-text-soft"
           style={{
-            fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 300,
+            fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', fontWeight: 500,
             fontStyle: 'italic', lineHeight: 1.1, marginBottom: '3.5rem',
           }}
         >
@@ -62,7 +62,7 @@ export default function LoveLetter() {
           animate={inView ? { scaleX: 1 } : {}}
           transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            height: '1px', transformOrigin: 'left',
+            height: '2px', transformOrigin: 'left',
             background: 'linear-gradient(90deg, var(--accent-rose), transparent)',
             marginBottom: '3.5rem',
           }}
@@ -78,10 +78,11 @@ export default function LoveLetter() {
               transition={{ delay: 0.4 + i * 0.15, duration: 1, ease: [0.16, 1, 0.3, 1] }}
               className="font-display"
               style={{
-                fontSize: 'clamp(1rem, 2vw, 1.25rem)', fontWeight: i === 0 ? 500 : 300,
+                fontSize: 'clamp(1.05rem, 2.2vw, 1.35rem)',
+                fontWeight: i === 0 ? 600 : 400,
                 fontStyle: i === 0 ? 'italic' : 'normal',
-                color: i === 0 ? 'var(--text-primary)' : 'var(--text-secondary)',
-                lineHeight: 1.9,
+                color: 'var(--text-primary)',
+                lineHeight: 1.95,
               }}
             >
               {para}
@@ -97,10 +98,10 @@ export default function LoveLetter() {
           style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
         >
           <div className="divider-rose" />
-          <p className="font-display" style={{ fontStyle: 'italic', color: 'var(--text-muted)', marginTop: '1.25rem', fontSize: '0.9375rem' }}>
+          <p className="font-display" style={{ fontStyle: 'italic', color: 'var(--text-secondary)', marginTop: '1.25rem', fontSize: '1.05rem', fontWeight: 500 }}>
             With everything,
           </p>
-          <p className="font-display gradient-text" style={{ fontSize: '1.5rem', fontWeight: 400, fontStyle: 'italic' }}>
+          <p className="font-display gradient-text" style={{ fontSize: '1.75rem', fontWeight: 600, fontStyle: 'italic' }}>
             Nishant (Nishu) ♥
           </p>
         </motion.div>

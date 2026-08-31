@@ -97,17 +97,18 @@ function ReasonCard({ item, index }: { item: typeof reasonsData[0], index: numbe
       )}
 
       <span className="font-display" style={{
-        fontSize: '2.5rem', fontWeight: 300,
-        color: hovered ? 'rgba(255,111,159,0.2)' : 'rgba(255,111,159,0.08)',
+        fontSize: '2.5rem', fontWeight: 600,
+        color: 'var(--accent-rose)',
+        opacity: hovered ? 0.45 : 0.25,
         lineHeight: 1, display: 'block', marginBottom: '0.75rem',
-        transition: 'color 0.3s ease',
+        transition: 'all 0.3s ease',
       }}>
         {item.number}
       </span>
 
       <h3 className="font-editorial" style={{
-        fontSize: 'clamp(1rem, 1.8vw, 1.25rem)',
-        fontWeight: 500, color: 'var(--text-primary)',
+        fontSize: 'clamp(1.15rem, 2vw, 1.4rem)',
+        fontWeight: 600, color: 'var(--text-primary)',
         marginBottom: '0.625rem', lineHeight: 1.3,
         transition: 'color 0.3s ease',
       }}>
@@ -115,8 +116,8 @@ function ReasonCard({ item, index }: { item: typeof reasonsData[0], index: numbe
       </h3>
 
       <p className="font-inter" style={{
-        fontSize: '0.8125rem', fontWeight: 300, lineHeight: 1.7,
-        color: hovered ? 'var(--text-secondary)' : 'var(--text-dim)',
+        fontSize: '0.925rem', fontWeight: 400, lineHeight: 1.75,
+        color: 'var(--text-primary)',
         transition: 'color 0.3s ease',
       }}>
         {item.detail}

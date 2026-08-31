@@ -196,8 +196,8 @@ function StoryItem({
         <h3
           className="font-editorial"
           style={{
-            fontSize: 'clamp(1.125rem, 2vw, 1.4rem)',
-            fontWeight: 500,
+            fontSize: 'clamp(1.2rem, 2.2vw, 1.5rem)',
+            fontWeight: 600,
             color: 'var(--text-primary)',
             marginBottom: '0.875rem',
             lineHeight: 1.3,
@@ -208,10 +208,10 @@ function StoryItem({
         <p
           className="font-inter"
           style={{
-            fontSize: '0.875rem',
-            fontWeight: 300,
-            lineHeight: 1.75,
-            color: 'var(--text-muted)',
+            fontSize: '0.95rem',
+            fontWeight: 400,
+            lineHeight: 1.8,
+            color: 'var(--text-primary)',
             marginBottom: '1rem',
           }}
         >
@@ -220,10 +220,10 @@ function StoryItem({
         <p
           className="font-display"
           style={{
-            fontSize: '0.925rem',
+            fontSize: '1.05rem',
+            fontWeight: 500,
             fontStyle: 'italic',
-            color: 'var(--accent-blush)',
-            opacity: 0.85,
+            color: 'var(--accent-rose)',
           }}
         >
           "{item.quote}"

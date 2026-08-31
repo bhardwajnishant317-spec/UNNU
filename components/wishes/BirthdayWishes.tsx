@@ -58,15 +58,15 @@ function WishItem({ item, index }: { item: typeof wishesData[0], index: number }
       style={{
         display: 'flex', gap: '1.5rem', alignItems: 'flex-start',
         padding: 'clamp(1.25rem, 2.5vw, 2rem) 0',
-        borderBottom: '1px solid rgba(255,111,159,0.06)',
+        borderBottom: '1px solid var(--card-border)',
       }}
     >
-      <span style={{ color: 'var(--accent-rose)', opacity: 0.5, fontSize: '0.6rem', marginTop: '0.5rem', flexShrink: 0 }}>
+      <span style={{ color: 'var(--accent-rose)', fontSize: '0.85rem', marginTop: '0.4rem', flexShrink: 0 }}>
         {item.icon}
       </span>
       <p className="font-display" style={{
-        fontSize: 'clamp(1rem, 2vw, 1.375rem)', fontWeight: 300,
-        fontStyle: 'italic', color: 'var(--text-secondary)', lineHeight: 1.7,
+        fontSize: 'clamp(1.15rem, 2.2vw, 1.5rem)', fontWeight: 500,
+        fontStyle: 'italic', color: 'var(--text-primary)', lineHeight: 1.75,
       }}>
         {item.wish}
       </p>

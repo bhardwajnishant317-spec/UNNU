@@ -61,8 +61,8 @@ function LittleThing({ text, index }: { text: string, index: number }) {
       transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       style={{
         padding: '1.25rem 0',
-        borderBottom: '1px solid rgba(255,111,159,0.05)',
-        display: 'flex', alignItems: 'center', gap: '1rem',
+        borderBottom: '1px solid var(--card-border)',
+        display: 'flex', alignItems: 'center', gap: '1.25rem',
       }}
     >
       <motion.div
@@ -70,14 +70,14 @@ function LittleThing({ text, index }: { text: string, index: number }) {
         animate={inView ? { scale: 1 } : {}}
         transition={{ delay: index * 0.1 + 0.2, duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
         style={{
-          width: '4px', height: '4px', borderRadius: '50%',
+          width: '6px', height: '6px', borderRadius: '50%',
           background: 'var(--accent-rose)', flexShrink: 0,
         }}
       />
       <p className="font-display" style={{
-        fontSize: 'clamp(1.125rem, 2.5vw, 1.75rem)',
-        fontWeight: 300, fontStyle: 'italic',
-        color: 'var(--text-secondary)', lineHeight: 1.4,
+        fontSize: 'clamp(1.25rem, 2.6vw, 1.85rem)',
+        fontWeight: 500, fontStyle: 'italic',
+        color: 'var(--text-primary)', lineHeight: 1.4,
         textAlign: 'left',
       }}>
         {text}
