@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Music, Pause, Play } from 'lucide-react'
 
-const START_TIME_SEC = 30
+const START_TIME_SEC = 0
 
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -15,7 +15,7 @@ export default function MusicPlayer() {
   const startPlayback = async () => {
     if (!audioRef.current || userPaused) return
     try {
-      if (audioRef.current.currentTime < START_TIME_SEC) {
+      if (START_TIME_SEC > 0 && audioRef.current.currentTime < START_TIME_SEC) {
         audioRef.current.currentTime = START_TIME_SEC
       }
       audioRef.current.volume = 0.75
@@ -59,9 +59,6 @@ export default function MusicPlayer() {
       setUserPaused(true)
     } else {
       setUserPaused(false)
-      if (audioRef.current.currentTime < START_TIME_SEC) {
-        audioRef.current.currentTime = START_TIME_SEC
-      }
       try {
         audioRef.current.volume = 0.75
         await audioRef.current.play()
@@ -83,11 +80,6 @@ export default function MusicPlayer() {
         loop
         preload="auto"
         onEnded={handleEnded}
-        onLoadedMetadata={() => {
-          if (audioRef.current && audioRef.current.currentTime < START_TIME_SEC) {
-            audioRef.current.currentTime = START_TIME_SEC
-          }
-        }}
       >
         <source src="/music/song.webm" type="audio/webm" />
         <source src="/music/song.mp3" type="audio/mpeg" />
