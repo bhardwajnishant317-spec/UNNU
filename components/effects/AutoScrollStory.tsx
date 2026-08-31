@@ -6,7 +6,13 @@ import { Play, Pause, Compass } from 'lucide-react'
 const RESUME_DELAY_MS = 2800 // Resume after 2.8s of no interaction
 const SCROLL_SPEED_PX_PER_SEC = 38 // Gentle, luxury reading speed
 
-export default function AutoScrollStory({ giftOpened }: { giftOpened: boolean }) {
+export default function AutoScrollStory({
+  active = true,
+  giftOpened,
+}: {
+  active?: boolean
+  giftOpened: boolean
+}) {
   const [enabled, setEnabled] = useState(true)
   const [isHolding, setIsHolding] = useState(false)
   const [countdown, setCountdown] = useState<number | null>(null)
@@ -18,11 +24,15 @@ export default function AutoScrollStory({ giftOpened }: { giftOpened: boolean })
   const lastTimeRef = useRef<number | null>(null)
   const subPixelAccumulator = useRef<number>(0)
 
-  // Show the pill after initial intro
+  // Show the pill after active
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 2500)
+    if (!active) {
+      setVisible(false)
+      return
+    }
+    const timer = setTimeout(() => setVisible(true), 1200)
     return () => clearTimeout(timer)
-  }, [])
+  }, [active])
 
   // Interaction Handler: pauses auto-scroll on touch/scroll and schedules resume
   const handleUserInteraction = useCallback(() => {
@@ -73,7 +83,7 @@ export default function AutoScrollStory({ giftOpened }: { giftOpened: boolean })
 
   // Continuous smooth auto-scrolling loop
   useEffect(() => {
-    if (!enabled || isHolding) {
+    if (!active || !enabled || isHolding) {
       if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current)
       lastTimeRef.current = null
       return

@@ -13,8 +13,12 @@ export default function WelcomeGate({ onEnter }: { onEnter: () => void }) {
   useEffect(() => {
     const raw = localStorage.getItem(GATE_KEY)
     const shouldShow = !raw || Date.now() - parseInt(raw, 10) > GATE_EXPIRY_MS
-    if (shouldShow) setVisible(true)
-  }, [])
+    if (shouldShow) {
+      setVisible(true)
+    } else {
+      onEnter()
+    }
+  }, [onEnter])
 
   const handleEnter = () => {
     setLeaving(true)

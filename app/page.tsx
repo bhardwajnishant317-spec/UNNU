@@ -26,6 +26,7 @@ const CustomCursor = dynamic(() => import('@/components/cursor/CustomCursor'), {
 const LenisProvider = dynamic(() => import('@/components/effects/LenisProvider'), { ssr: false })
 
 export default function Home() {
+  const [welcomeEntered, setWelcomeEntered] = useState(false)
   const [introComplete, setIntroComplete] = useState(false)
   const [giftOpened, setGiftOpened] = useState(false)
 
@@ -34,10 +35,10 @@ export default function Home() {
       <GrainOverlay />
       <CustomCursor />
       <LenisProvider>
-        <WelcomeGate onEnter={() => {}} />
+        <WelcomeGate onEnter={() => setWelcomeEntered(true)} />
         <Navigation />
         <MusicPlayer />
-        <AutoScrollStory giftOpened={giftOpened} />
+        <AutoScrollStory active={welcomeEntered && introComplete} giftOpened={giftOpened} />
         <main>
           <CinematicIntro onComplete={() => setIntroComplete(true)} />
           <HeroSection />
