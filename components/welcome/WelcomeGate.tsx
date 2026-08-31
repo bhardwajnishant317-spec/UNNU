@@ -19,6 +19,9 @@ export default function WelcomeGate({ onEnter }: { onEnter: () => void }) {
   const handleEnter = () => {
     setLeaving(true)
     localStorage.setItem(GATE_KEY, Date.now().toString())
+    try {
+      window.dispatchEvent(new CustomEvent('unnati-play-music'))
+    } catch {}
     setTimeout(() => {
       setVisible(false)
       onEnter()
