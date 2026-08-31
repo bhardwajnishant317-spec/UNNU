@@ -8,66 +8,66 @@ const START_TIME_SEC = 30
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
+  const [userPaused, setUserPaused] = useState(false)
   const [visible, setVisible] = useState(false)
 
-  useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 2000)
-
-    // Listen for custom trigger (e.g. user entering welcome gate)
-    const handleTrigger = () => {
-      startPlayback()
-    }
-    window.addEventListener('unnati-play-music', handleTrigger)
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener('unnati-play-music', handleTrigger)
-    }
-  }, [])
-
+  // Start playback function
   const startPlayback = async () => {
-    if (!audioRef.current) return
+    if (!audioRef.current || userPaused) return
     try {
       if (audioRef.current.currentTime < START_TIME_SEC) {
         audioRef.current.currentTime = START_TIME_SEC
       }
-      audioRef.current.volume = 0
+      audioRef.current.volume = 0.75
       await audioRef.current.play()
       setPlaying(true)
-
-      // Smooth volume fade-in
-      let vol = 0
-      const fade = setInterval(() => {
-        vol = Math.min(vol + 0.05, 0.75)
-        if (audioRef.current) audioRef.current.volume = vol
-        if (vol >= 0.75) clearInterval(fade)
-      }, 100)
     } catch {
-      // Browser autoplay policy might need explicit user tap
+      // Autoplay blocked by browser policy until user gesture
     }
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(true), 1500)
+
+    // Attempt direct autoplay on load
+    startPlayback()
+
+    // Global first-gesture listener to bypass browser autoplay restrictions seamlessly
+    const handleFirstInteraction = () => {
+      if (!userPaused) {
+        startPlayback()
+      }
+    }
+
+    window.addEventListener('click', handleFirstInteraction, { once: true })
+    window.addEventListener('touchstart', handleFirstInteraction, { once: true })
+    window.addEventListener('unnati-play-music', startPlayback)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('click', handleFirstInteraction)
+      window.removeEventListener('touchstart', handleFirstInteraction)
+      window.removeEventListener('unnati-play-music', startPlayback)
+    }
+  }, [userPaused])
 
   const toggle = async () => {
     if (!audioRef.current) return
     if (playing) {
-      handlePause()
+      audioRef.current.pause()
+      setPlaying(false)
+      setUserPaused(true)
     } else {
-      await startPlayback()
-    }
-  }
-
-  const handlePause = () => {
-    if (!audioRef.current) return
-    let vol = audioRef.current.volume
-    const fade = setInterval(() => {
-      vol = Math.max(vol - 0.05, 0)
-      if (audioRef.current) audioRef.current.volume = vol
-      if (vol <= 0) {
-        clearInterval(fade)
-        audioRef.current?.pause()
-        setPlaying(false)
+      setUserPaused(false)
+      if (audioRef.current.currentTime < START_TIME_SEC) {
+        audioRef.current.currentTime = START_TIME_SEC
       }
-    }, 80)
+      try {
+        audioRef.current.volume = 0.75
+        await audioRef.current.play()
+        setPlaying(true)
+      } catch {}
+    }
   }
 
   const handleEnded = () => {
@@ -98,11 +98,11 @@ export default function MusicPlayer() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'fixed',
-              bottom: 'clamp(1.25rem, 3vh, 2.25rem)',
-              right: 'clamp(1.25rem, 3vw, 2.25rem)',
+              bottom: 'clamp(1rem, 3vh, 2rem)',
+              right: 'clamp(1rem, 3vw, 2rem)',
               zIndex: 9990,
               display: 'flex',
               alignItems: 'center',
@@ -114,8 +114,8 @@ export default function MusicPlayer() {
               className="interactive magnetic"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              title={playing ? 'Pause music' : 'Play song from 30s'}
-              aria-label={playing ? 'Pause music' : 'Play song from 30s'}
+              title={playing ? 'Pause music' : 'Play song'}
+              aria-label={playing ? 'Pause music' : 'Play song'}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -148,7 +148,7 @@ export default function MusicPlayer() {
                   fontWeight: 600,
                 }}
               >
-                {playing ? 'Now Playing' : 'Our Song (0:30)'}
+                {playing ? 'Playing' : 'Paused (Tap to Play)'}
               </span>
               {playing ? (
                 <Pause size={12} color="var(--accent-rose)" />

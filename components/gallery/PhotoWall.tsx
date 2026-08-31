@@ -7,7 +7,7 @@ import Lightbox from './Lightbox'
 
 export default function PhotoWall() {
   const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '60px' })
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   return (
@@ -98,15 +98,15 @@ function GalleryCard({
   onClick: () => void
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const inView = useInView(ref, { once: true, margin: '40px' })
   const [hovered, setHovered] = useState(false)
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: (index % 3) * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ delay: (index % 3) * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

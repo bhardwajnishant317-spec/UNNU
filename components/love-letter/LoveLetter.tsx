@@ -5,7 +5,7 @@ import { PERSON, loveLetterParagraphs } from '@/lib/constants/content'
 
 export default function LoveLetter() {
   const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
+  const inView = useInView(ref, { once: true, margin: '50px' })
 
   return (
     <section
@@ -13,7 +13,7 @@ export default function LoveLetter() {
       ref={ref}
       style={{
         background: 'var(--section-gradient-1)',
-        padding: 'clamp(6rem, 12vw, 12rem) clamp(1.5rem, 6vw, 6rem)',
+        padding: 'clamp(5rem, 10vw, 10rem) clamp(1.25rem, 5vw, 5rem)',
         position: 'relative', overflow: 'hidden',
       }}
     >
@@ -33,24 +33,24 @@ export default function LoveLetter() {
 
         {/* Label */}
         <motion.p
-          initial={{ opacity: 0, x: -20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
           className="text-label"
-          style={{ marginBottom: '1.5rem' }}
+          style={{ marginBottom: '1rem' }}
         >
           A letter
         </motion.p>
 
         {/* Heading */}
         <motion.h2
-          initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
-          animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-          transition={{ delay: 0.15, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="font-display gradient-text-soft"
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', fontWeight: 500,
-            fontStyle: 'italic', lineHeight: 1.1, marginBottom: '3.5rem',
+            fontStyle: 'italic', lineHeight: 1.1, marginBottom: '2.5rem',
           }}
         >
           For You, {PERSON.name}.
@@ -60,22 +60,22 @@ export default function LoveLetter() {
         <motion.div
           initial={{ scaleX: 0 }}
           animate={inView ? { scaleX: 1 } : {}}
-          transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           style={{
             height: '2px', transformOrigin: 'left',
             background: 'linear-gradient(90deg, var(--accent-rose), transparent)',
-            marginBottom: '3.5rem',
+            marginBottom: '2.5rem',
           }}
         />
 
         {/* Letter paragraphs */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
           {loveLetterParagraphs.map((para, i) => (
             <motion.p
               key={i}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4 + i * 0.15, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: 0.15 + i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="font-display"
               style={{
                 fontSize: 'clamp(1.05rem, 2.2vw, 1.35rem)',

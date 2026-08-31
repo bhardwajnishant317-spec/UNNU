@@ -5,7 +5,7 @@ import { storyData } from '@/lib/constants/content'
 
 export default function OurStory() {
   const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '60px' })
 
   return (
     <section
@@ -95,7 +95,7 @@ function StoryItem({
   isLeft: boolean
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const inView = useInView(ref, { once: true, margin: '40px' })
 
   return (
     <div

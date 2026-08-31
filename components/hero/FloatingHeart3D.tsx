@@ -21,13 +21,13 @@ function RealisticGlassHeart() {
     shape.bezierCurveTo(-0.45, 0.95, 0, 0.65, 0, 0.35)
 
     const extrudeSettings: THREE.ExtrudeGeometryOptions = {
-      depth: 0.3,
+      depth: 0.28,
       bevelEnabled: true,
-      bevelSegments: 16,
-      steps: 2,
-      bevelSize: 0.18,
-      bevelThickness: 0.18,
-      curveSegments: 64,
+      bevelSegments: 8,
+      steps: 1,
+      bevelSize: 0.16,
+      bevelThickness: 0.16,
+      curveSegments: 32,
     }
 
     const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings)
@@ -60,13 +60,13 @@ function RealisticGlassHeart() {
         color="#FF3366"
         emissive="#7A0026"
         emissiveIntensity={0.55}
-        roughness={0.08}
-        metalness={0.15}
+        roughness={0.1}
+        metalness={0.12}
         clearcoat={1.0}
         clearcoatRoughness={0.1}
-        transmission={0.45}
-        thickness={1.2}
-        ior={1.52}
+        transmission={0.4}
+        thickness={1.0}
+        ior={1.5}
         reflectivity={0.9}
         transparent={true}
         opacity={0.95}
@@ -81,7 +81,7 @@ export default function FloatingHeart3D() {
       camera={{ position: [0, 0, 3.2], fov: 45 }}
       style={{ background: 'transparent', width: '100%', height: '100%' }}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
     >
       <ambientLight intensity={0.8} />
       {/* Dynamic colorful lights for jewel-like ruby highlights */}

@@ -5,7 +5,7 @@ import { whatYouAreData } from '@/lib/constants/content'
 
 export default function WhatYouAre() {
   const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
+  const inView = useInView(ref, { once: true, margin: '50px' })
   const [activeIndex, setActiveIndex] = useState(0)
   const [started, setStarted] = useState(false)
 

@@ -9,7 +9,7 @@ interface GiftSurpriseProps {
 
 export default function GiftSurprise({ onOpen }: GiftSurpriseProps) {
   const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '60px' })
   const [opened, setOpened] = useState(false)
   const [particles, setParticles] = useState<{ id: number; x: number; y: number; color: string; size: number }[]>([])
 

@@ -5,7 +5,7 @@ import { wishesData } from '@/lib/constants/content'
 
 export default function BirthdayWishes() {
   const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '60px' })
 
   return (
     <section
@@ -13,7 +13,7 @@ export default function BirthdayWishes() {
       ref={ref}
       style={{
         background: 'var(--section-gradient-2)',
-        padding: 'clamp(6rem, 12vw, 12rem) clamp(1.5rem, 6vw, 6rem)',
+        padding: 'clamp(5rem, 10vw, 10rem) clamp(1rem, 4vw, 4rem)',
       }}
     >
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
@@ -47,14 +47,14 @@ export default function BirthdayWishes() {
 
 function WishItem({ item, index }: { item: typeof wishesData[0], index: number }) {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const inView = useInView(ref, { once: true, margin: '40px' })
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: -30 }}
+      initial={{ opacity: 0, x: -15 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ delay: index * 0.1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ delay: (index % 4) * 0.04, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       style={{
         display: 'flex', gap: '1.5rem', alignItems: 'flex-start',
         padding: 'clamp(1.25rem, 2.5vw, 2rem) 0',
