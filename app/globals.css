@@ -376,31 +376,8 @@ html.lenis { height: auto; }
   border: 1px solid rgba(255, 111, 159, 0.08);
 }
 
-/* ─── Gallery Grid ───────────────────────────────────────── */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 320px;
-  gap: 12px;
+/* ─── Lightbox & Card Utilities ─────────────────────────── */
+.gallery-card-hover {
+  transition: transform 0.4s var(--ease-cinematic), box-shadow 0.4s ease;
 }
 
-.gallery-item:nth-child(1) { grid-row: span 2; }
-.gallery-item:nth-child(5) { grid-row: span 2; }
-.gallery-item:nth-child(8) { grid-column: span 2; }
-
-@media (max-width: 1024px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 280px;
-  }
-  .gallery-item:nth-child(8) { grid-column: span 1; }
-}
-
-@media (max-width: 640px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 340px;
-  }
-  .gallery-item:nth-child(1),
-  .gallery-item:nth-child(5) { grid-row: span 1; }
-}

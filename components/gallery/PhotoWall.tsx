@@ -17,32 +17,56 @@ export default function PhotoWall() {
       style={{
         background: 'linear-gradient(to bottom, #0B0509, #050306)',
         padding: 'clamp(6rem, 12vw, 12rem) clamp(1.5rem, 6vw, 6rem)',
+        position: 'relative',
       }}
     >
-      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: 'clamp(3rem, 6vw, 6rem)' }}>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(3.5rem, 7vw, 6rem)' }}>
           <motion.p
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-label" style={{ marginBottom: '1rem' }}
+            className="text-label"
+            style={{ marginBottom: '1rem', color: 'var(--accent-rose)', letterSpacing: '0.25em' }}
           >
-            Moments
+            Memories in Frame
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.15, duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="font-display gradient-text-soft"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', fontWeight: 300, lineHeight: 1.05 }}
           >
             A Wall of Memories
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="font-inter"
+            style={{
+              marginTop: '1rem',
+              color: 'var(--text-muted)',
+              fontSize: 'clamp(0.85rem, 1.5vw, 1rem)',
+              fontWeight: 300,
+            }}
+          >
+            Every snapshot holds a story worth keeping forever.
+          </motion.p>
         </div>
 
-        {/* Gallery grid */}
-        <div className="gallery-grid">
+        {/* Gallery Grid: Elegant responsive 3-column / 2-column layout */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))',
+            gap: 'clamp(1.25rem, 2.5vw, 2rem)',
+          }}
+        >
           {galleryData.map((item, i) => (
-            <GalleryItem
+            <GalleryCard
               key={i}
               item={item}
               index={i}
@@ -64,8 +88,14 @@ export default function PhotoWall() {
   )
 }
 
-function GalleryItem({ item, index, onClick }: {
-  item: typeof galleryData[0], index: number, onClick: () => void
+function GalleryCard({
+  item,
+  index,
+  onClick,
+}: {
+  item: (typeof galleryData)[0]
+  index: number
+  onClick: () => void
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
@@ -74,20 +104,34 @@ function GalleryItem({ item, index, onClick }: {
   return (
     <motion.div
       ref={ref}
-      className="gallery-item interactive"
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={inView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ delay: index * 0.06, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: (index % 3) * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && onClick()}
+      aria-label={`View photo: ${item.alt}`}
       style={{
-        position: 'relative', overflow: 'hidden', cursor: 'pointer',
-        background: '#0B0509',
+        position: 'relative',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        aspectRatio: '3 / 4',
+        cursor: 'pointer',
+        background: '#120810',
+        border: `1px solid ${hovered ? 'rgba(255, 111, 159, 0.4)' : 'rgba(255, 111, 159, 0.1)'}`,
+        boxShadow: hovered
+          ? '0 12px 36px -8px rgba(255, 77, 125, 0.25)'
+          : '0 4px 20px -4px rgba(0, 0, 0, 0.6)',
+        transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+        transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
       }}
     >
+      {/* Image with proper focal positioning */}
       <motion.div
-        animate={{ scale: hovered ? 1.06 : 1 }}
+        animate={{ scale: hovered ? 1.05 : 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         style={{ width: '100%', height: '100%', position: 'relative' }}
       >
@@ -95,38 +139,77 @@ function GalleryItem({ item, index, onClick }: {
           src={item.src}
           alt={item.alt}
           fill
-          className="img-cover"
+          priority={index < 3}
+          style={{
+            objectFit: 'cover',
+            objectPosition: item.position || 'center top',
+          }}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </motion.div>
 
-      {/* Overlay */}
-      <motion.div
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
+      {/* Dark gradient overlay for text legibility */}
+      <div
         style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(to top, rgba(5,3,6,0.85) 0%, rgba(5,3,6,0.2) 60%, transparent 100%)',
-          display: 'flex', alignItems: 'flex-end', padding: '1.5rem',
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(5, 3, 6, 0.88) 0%, rgba(5, 3, 6, 0.2) 50%, rgba(5, 3, 6, 0.3) 100%)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '1.25rem 1.5rem',
+          pointerEvents: 'none',
         }}
       >
-        <p className="font-display" style={{
-          fontSize: '0.9375rem', fontStyle: 'italic',
-          color: 'var(--text-primary)', lineHeight: 1.4,
-        }}>
-          {item.caption}
-        </p>
-      </motion.div>
+        {/* Top bar with index badge */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <span
+            style={{
+              fontSize: '0.625rem',
+              letterSpacing: '0.15em',
+              fontWeight: 500,
+              padding: '0.25rem 0.625rem',
+              borderRadius: '9999px',
+              background: 'rgba(5, 3, 6, 0.65)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(255, 111, 159, 0.2)',
+              color: 'var(--accent-blush)',
+            }}
+          >
+            {String(index + 1).padStart(2, '0')}
+          </span>
+        </div>
 
-      {/* Index number */}
-      <div style={{
-        position: 'absolute', top: '1rem', right: '1rem',
-        background: 'rgba(5,3,6,0.7)', backdropFilter: 'blur(8px)',
-        padding: '0.25rem 0.625rem',
-      }}>
-        <span className="text-label" style={{ fontSize: '0.5rem', opacity: 0.5 }}>
-          {String(index + 1).padStart(2, '0')}
-        </span>
+        {/* Bottom caption */}
+        <div>
+          <p
+            className="font-display"
+            style={{
+              fontSize: '1.125rem',
+              fontStyle: 'italic',
+              fontWeight: 400,
+              color: 'var(--text-primary)',
+              lineHeight: 1.3,
+              marginBottom: '0.25rem',
+              transform: hovered ? 'translateY(0)' : 'translateY(2px)',
+              transition: 'transform 0.3s ease',
+            }}
+          >
+            {item.caption}
+          </p>
+          <span
+            style={{
+              fontSize: '0.65rem',
+              color: 'var(--accent-rose)',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              opacity: hovered ? 1 : 0.6,
+              transition: 'opacity 0.3s ease',
+            }}
+          >
+            Tap to expand ↗
+          </span>
+        </div>
       </div>
     </motion.div>
   )
