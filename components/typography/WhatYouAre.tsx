@@ -31,7 +31,7 @@ export default function WhatYouAre() {
       ref={ref}
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(to bottom, #0B0509, #140711)',
+        background: 'var(--section-gradient-1)',
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
         padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 6vw, 6rem)',

@@ -12,7 +12,7 @@ export default function LoveLetter() {
       id="letter"
       ref={ref}
       style={{
-        background: 'linear-gradient(to bottom, #050306, #0B0509 50%, #140711)',
+        background: 'var(--section-gradient-1)',
         padding: 'clamp(6rem, 12vw, 12rem) clamp(1.5rem, 6vw, 6rem)',
         position: 'relative', overflow: 'hidden',
       }}
@@ -24,7 +24,7 @@ export default function LoveLetter() {
         style={{
           position: 'absolute', right: '-200px', top: '50%',
           width: '500px', height: '500px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,111,159,0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, var(--spotlight-glow) 0%, transparent 70%)',
           transform: 'translateY(-50%)', pointerEvents: 'none',
         }}
       />

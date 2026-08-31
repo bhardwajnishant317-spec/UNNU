@@ -35,7 +35,7 @@ export default function GiftSurprise({ onOpen }: GiftSurpriseProps) {
       id="surprise"
       ref={ref}
       style={{
-        background: 'linear-gradient(to bottom, #0B0509, #140711)',
+        background: 'var(--section-gradient-1)',
         padding: 'clamp(6rem, 12vw, 12rem) clamp(1.5rem, 6vw, 6rem)',
         textAlign: 'center', position: 'relative', overflow: 'hidden',
       }}

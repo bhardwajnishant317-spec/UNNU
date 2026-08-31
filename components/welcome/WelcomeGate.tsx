@@ -35,7 +35,7 @@ export default function WelcomeGate({ onEnter }: { onEnter: () => void }) {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           style={{
             position: 'fixed', inset: 0, zIndex: 99990,
-            background: 'radial-gradient(ellipse at center, #1A0A12 0%, #050306 70%)',
+            background: 'radial-gradient(ellipse at center, var(--bg-wine) 0%, var(--bg-base) 70%)',
             display: 'flex', flexDirection: 'column',
             alignItems: 'center', justifyContent: 'center',
             padding: '2rem',

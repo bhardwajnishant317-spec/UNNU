@@ -12,7 +12,7 @@ export default function ReasonsSection() {
       id="reasons"
       ref={ref}
       style={{
-        background: 'linear-gradient(to bottom, #050306, #0B0509)',
+        background: 'var(--section-gradient-3)',
         padding: 'clamp(6rem, 12vw, 12rem) clamp(1.5rem, 6vw, 6rem)',
       }}
     >
@@ -42,8 +42,7 @@ export default function ReasonsSection() {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))',
-          gap: '1px',
-          border: '1px solid rgba(255,111,159,0.06)',
+          gap: '12px',
         }}>
           {reasonsData.map((item, i) => (
             <ReasonCard key={item.number} item={item} index={i} />
@@ -78,11 +77,13 @@ function ReasonCard({ item, index }: { item: typeof reasonsData[0], index: numbe
       onMouseMove={handleMouseMove}
       style={{
         padding: 'clamp(1.5rem, 3vw, 2.5rem)',
-        background: hovered ? 'rgba(26, 10, 18, 0.8)' : 'rgba(12, 5, 10, 0.5)',
-        border: '1px solid transparent',
-        borderColor: hovered ? 'rgba(255,111,159,0.15)' : 'rgba(255,111,159,0.04)',
+        background: 'var(--card-bg)',
+        border: '1px solid',
+        borderColor: hovered ? 'var(--card-border-hover)' : 'var(--card-border)',
+        borderRadius: '16px',
+        boxShadow: hovered ? '0 12px 30px rgba(0, 0, 0, 0.15)' : '0 4px 15px rgba(0, 0, 0, 0.05)',
         transform: `perspective(800px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
-        transition: 'background 0.3s ease, border-color 0.3s ease, transform 0.15s ease',
+        transition: 'background 0.3s ease, border-color 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease',
         cursor: 'default', position: 'relative', overflow: 'hidden',
       }}
     >

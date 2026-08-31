@@ -19,7 +19,7 @@ export default function GrandFinale() {
       style={{
         minHeight: '100vh', position: 'relative', overflow: 'hidden',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        background: 'radial-gradient(ellipse 80% 80% at 50% 40%, #1A0A12 0%, #0B0509 40%, #050306 100%)',
+        background: 'var(--hero-gradient)',
         padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 6vw, 6rem)',
         textAlign: 'center',
       }}
@@ -44,7 +44,7 @@ export default function GrandFinale() {
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute', inset: 0,
-          background: 'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,77,125,0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 60% 60% at 50% 50%, var(--spotlight-glow) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />

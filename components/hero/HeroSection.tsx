@@ -53,7 +53,7 @@ export default function HeroSection() {
       style={{
         minHeight: '100vh', position: 'relative', overflow: 'hidden',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        background: 'radial-gradient(ellipse 80% 80% at 50% 50%, #1A0A12 0%, #0B0509 50%, #050306 100%)',
+        background: 'var(--hero-gradient)',
       }}
     >
       {/* Floating particles */}
@@ -78,7 +78,7 @@ export default function HeroSection() {
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute', width: '700px', height: '700px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,77,125,0.12) 0%, transparent 65%)',
+          background: 'radial-gradient(circle, var(--spotlight-glow) 0%, transparent 65%)',
           pointerEvents: 'none', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
         }}
       />

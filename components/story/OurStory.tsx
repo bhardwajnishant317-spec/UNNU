@@ -12,7 +12,7 @@ export default function OurStory() {
       id="story"
       ref={ref}
       style={{
-        background: '#050306',
+        background: 'var(--bg-base)',
         padding: 'clamp(6rem, 12vw, 12rem) clamp(1.5rem, 6vw, 6rem)',
         position: 'relative',
       }}
@@ -107,8 +107,10 @@ function StoryItem({ item, index, isLeft }: {
         style={{
           width: '44%',
           padding: 'clamp(1.5rem, 3vw, 2.5rem)',
-          background: 'rgba(18, 8, 16, 0.6)',
-          border: '1px solid rgba(255,111,159,0.08)',
+          background: 'var(--card-bg)',
+          border: '1px solid var(--card-border)',
+          borderRadius: '16px',
+          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.1)',
           position: 'relative',
         }}
       >

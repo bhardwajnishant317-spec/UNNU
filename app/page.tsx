@@ -1,6 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { ThemeProvider } from '@/components/theme/ThemeProvider'
 import WelcomeGate from '@/components/welcome/WelcomeGate'
 import Navigation from '@/components/navigation/Navigation'
 import CinematicIntro from '@/components/intro/CinematicIntro'
@@ -28,7 +29,7 @@ export default function Home() {
   const [giftOpened, setGiftOpened] = useState(false)
 
   return (
-    <>
+    <ThemeProvider>
       <GrainOverlay />
       <CustomCursor />
       <LenisProvider>
@@ -51,6 +52,6 @@ export default function Home() {
           <GrandFinale />
         </main>
       </LenisProvider>
-    </>
+    </ThemeProvider>
   )
 }

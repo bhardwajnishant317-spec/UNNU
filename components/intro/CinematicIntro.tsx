@@ -39,7 +39,7 @@ export default function CinematicIntro({ onComplete }: { onComplete: () => void 
           transition={{ duration: 0.9, ease: easing }}
           style={{
             position: 'fixed', inset: 0, zIndex: 9900,
-            background: 'radial-gradient(ellipse 60% 70% at 50% 50%, #1A0A12 0%, #050306 100%)',
+            background: 'radial-gradient(ellipse 60% 70% at 50% 50%, var(--bg-wine) 0%, var(--bg-base) 100%)',
             display: 'flex', flexDirection: 'column',
             alignItems: 'center', justifyContent: 'center',
             overflow: 'hidden',

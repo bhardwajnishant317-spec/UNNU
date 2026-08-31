@@ -15,7 +15,7 @@ export default function PhotoWall() {
       id="gallery"
       ref={ref}
       style={{
-        background: 'linear-gradient(to bottom, #0B0509, #050306)',
+        background: 'var(--section-gradient-2)',
         padding: 'clamp(6rem, 12vw, 12rem) clamp(1.5rem, 6vw, 6rem)',
         position: 'relative',
       }}

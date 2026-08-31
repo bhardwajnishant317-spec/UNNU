@@ -12,7 +12,7 @@ export default function LittleThings() {
       id="remember"
       ref={ref}
       style={{
-        background: 'linear-gradient(to bottom, #050306, #0B0509)',
+        background: 'var(--section-gradient-3)',
         padding: 'clamp(6rem, 12vw, 12rem) clamp(1.5rem, 6vw, 6rem)',
         textAlign: 'center',
       }}
