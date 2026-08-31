@@ -19,6 +19,7 @@ import HiddenMessage from '@/components/hidden/HiddenMessage'
 import GrandFinale from '@/components/finale/GrandFinale'
 import MusicPlayer from '@/components/music/MusicPlayer'
 import GrainOverlay from '@/components/effects/GrainOverlay'
+import AutoScrollStory from '@/components/effects/AutoScrollStory'
 import { useEffect, useState } from 'react'
 
 const CustomCursor = dynamic(() => import('@/components/cursor/CustomCursor'), { ssr: false })
@@ -36,6 +37,7 @@ export default function Home() {
         <WelcomeGate onEnter={() => {}} />
         <Navigation />
         <MusicPlayer />
+        <AutoScrollStory giftOpened={giftOpened} />
         <main>
           <CinematicIntro onComplete={() => setIntroComplete(true)} />
           <HeroSection />
