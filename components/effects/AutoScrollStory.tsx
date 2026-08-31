@@ -3,8 +3,8 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Play, Pause, Compass } from 'lucide-react'
 
-const RESUME_DELAY_MS = 2800 // Resume after 2.8s of no interaction
-const SCROLL_SPEED_PX_PER_SEC = 38 // Gentle, luxury reading speed
+const RESUME_DELAY_MS = 2400 // Resume after 2.4s of no interaction
+const SCROLL_SPEED_PX_PER_SEC = 58 // Faster, fluid, and engaging story speed
 
 export default function AutoScrollStory({
   active = true,
